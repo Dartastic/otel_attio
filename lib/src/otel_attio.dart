@@ -10,6 +10,7 @@ const _tracerName = 'dartastic_otel_libs_attio';
 APITracer _tracer() => OTelAPI.tracerProvider().getTracer(_tracerName);
 
 class AttioResult {
+  /// Creates a result.
   const AttioResult({
     this.itemCount,
     this.objectSlug,
@@ -52,8 +53,13 @@ class AttioResult {
   final int? statusCode;
 }
 
+/// What a traced call returned: the value for the caller plus fields
+/// recorded on the span.
 class AttioCallResult<T> {
+  /// Creates a call result.
   const AttioCallResult({required this.value, this.result});
+
+  /// The value returned to the caller.
   final T value;
   final AttioResult? result;
 }

@@ -5,11 +5,14 @@ import 'dart:async';
 
 const Symbol _suppressKey = #dartastic_otel_libs_attio_suppress;
 
+/// Whether instrumentation is suppressed in the current zone.
 bool attioInstrumentationSuppressed() => Zone.current[_suppressKey] == true;
 
+/// Runs [body] without creating spans for calls made inside it.
 T runWithoutAttioInstrumentation<T>(T Function() body) =>
     runZoned(body, zoneValues: {_suppressKey: true});
 
+/// Runs [body] without creating spans for calls made inside it.
 Future<T> runWithoutAttioInstrumentationAsync<T>(
   Future<T> Function() body,
 ) =>
